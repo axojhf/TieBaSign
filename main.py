@@ -158,9 +158,9 @@ def encodeData(data):
     return data
 
 
-def client_sign(bduss, tbs, fid, kw):
+def client_sign(bduss, tbs, fid, kw, tieba_index_num):
     # 客户端签到
-    logger.info("开始签到贴吧：" + kw)
+    logger.info("开始签到贴吧，第" + str(tieba_index_num) + "个吧")
     data = copy.copy(SIGN_DATA)
     data.update({BDUSS: bduss, FID: fid, KW: kw, TBS: tbs, TIMESTAMP: str(int(time.time()))})
     data = encodeData(data)
@@ -177,9 +177,11 @@ def main():
         logger.info("开始签到第" + str(n) + "个用户" + i)
         tbs = get_tbs(i)
         favorites = get_favorite(i)
+        tieba_index_num = 1
         for j in favorites:
             time.sleep(random.randint(1,5))
-            client_sign(i, tbs, j["id"], j["name"])
+            client_sign(i, tbs, j["id"], j["name"], tieba_index_num)
+            tieba_index_num += 1
         logger.info("完成第" + str(n) + "个用户签到")
     logger.info("所有用户签到结束")
 
