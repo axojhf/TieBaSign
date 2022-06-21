@@ -174,7 +174,7 @@ def main():
         if(len(i) <= 0):
             logger.info("未检测到BDUSS")
             continue
-        logger.info("开始签到第" + str(n) + "个用户" + i)
+        logger.info("开始签到第" + str(n) + "个用户")
         tbs = get_tbs(i)
         favorites = get_favorite(i)
         tieba_index_num = 1
